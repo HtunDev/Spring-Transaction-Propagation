@@ -25,7 +25,7 @@ public class DetailsRepository {
 		List<Integer> list = new ArrayList<>();
 
 		for (var name : names) {
-			var id = jdbcInsert.executeAndReturnKey(Map.of("header_id", headerId, "name", names)).intValue();
+			var id = jdbcInsert.executeAndReturnKey(Map.of("header_id", headerId, "name", name)).intValue();
 			list.add(id);
 		}
 
