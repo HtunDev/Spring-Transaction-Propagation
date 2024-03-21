@@ -7,6 +7,8 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class HeaderRepository {
@@ -20,7 +22,8 @@ public class HeaderRepository {
 		jdbcInsert.setColumnNames(List.of("name"));
 	}
 
-	public int create(String name) {
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public int create(String name) throws RuntimeException{
 		return jdbcInsert.executeAndReturnKey(Map.of("name", name)).intValue();
 	}
 }

@@ -23,4 +23,12 @@
 		<constructor-arg ref="hikariConfig"></constructor-arg>
 	</bean>
 
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<constructor-arg ref="hikariDataSource"></constructor-arg>
+	</bean>
+
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+
 </beans>

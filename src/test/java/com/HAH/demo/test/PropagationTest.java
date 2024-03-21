@@ -12,15 +12,19 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import com.HAH.demo.service.PropagationService;
 
 @SpringJUnitConfig(locations = "/applicaton.xml")
-@Sql(statements = { "set foreign_key_checks = 0;", "truncate table details_tbl;", "truncate table header_tbl;",
-		"set foreign_key_checks = 1;" })
+@Sql(statements = { 
+		"set foreign_key_checks = 0;",
+		"truncate table details_tbl;", 
+		"truncate table header_tbl;",
+		"set foreign_key_checks = 1;" 
+		})
 public class PropagationTest {
 
 	@Autowired
 	private PropagationService propagationService;
 
 	@ParameterizedTest
-	@CsvSource({ "OneHeader,OneDetails,0,1,1" })
+	@CsvSource("OneHeader,OneDetails,0,1,1")
 	void demoTest(String header, String details, int status, int headerId, int detailsId) {
 		var result = propagationService.save(status, header, details);
 
